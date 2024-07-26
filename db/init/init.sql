@@ -1,0 +1,16 @@
+CREATE DATABASE IF NOT EXISTS count_app;
+
+USE count_app;
+
+CREATE TABLE IF NOT EXISTS counter (
+    count INT NOT NULL DEFAULT 0
+);
+
+CREATE TABLE IF NOT EXISTS access_log (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    access_time DATETIME NOT NULL,
+    client_ip VARCHAR(15) NOT NULL,
+    internal_ip VARCHAR(15) NOT NULL
+);
+
+INSERT INTO counter (count) VALUES (0);
