@@ -2,23 +2,32 @@ services:
 
   app:
     build: ./app/
+    environment:
+      - PORT=8989
     networks: 
       - count_app
+    env_file:
+      - ./app/appdbpass.env
     volumes:
-      - ./app/app_logs/logs.log:/var/log/count_app.log
+      - ./app/app_logs:/var/log/count_app/
+    depends_on:
+      - db
     deploy:
       replicas: 3
 
   db:
-    build: ./db/
-    container_name: mysql_db
-    ports:
-      - "3306:3306"
+    image: "mysql:9.0.1"
     networks:
       - count_app
     volumes:
       - ./db/data:/var/lib/mysql
       - ./db/logs:/var/log/mysql
+      - ./db/init/:/docker-entrypoint-initdb.d/
+    env_file:
+      - ./db/dbpass.env
+    command:
+      mysqld --general-log=1 --general-log-file=/var/log/mysql/general_log.log
+
 
   nginx: 
     build: ./nginx/
@@ -32,4 +41,6 @@ services:
       - db 
   
 networks:
-  count_app:  
+  count_app:
+    name: count_app
+    driver: bridge
