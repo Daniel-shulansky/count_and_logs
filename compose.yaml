@@ -38,7 +38,6 @@ services:
       - count_app
     depends_on:
       - app
-      - db 
   
 networks:
   count_app:

@@ -30,3 +30,6 @@ def counter():
 def show_count():
     count = db_actions.get_count()
     return str(count)
+
+
+app.run(host='0.0.0.0', port=8989)
