@@ -11,6 +11,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    
+    - uses: actions/checkout@v4
 
     - name: config aws cred
       uses: aws-actions/configure-aws-credentials@v4
@@ -22,7 +24,6 @@ jobs:
     - name: set IMAGE_TAG
       run: IMAGE_TAG="count_app-$GITHUB_REF-$(git rev-parse --short $GITHUB_SHA)" && echo $IMAGE_TAG
     
-    - uses: actions/checkout@v4
     - name: build docker image out of app
       run:  docker build --no-cache -t $ECR_REPO:$IMAGE_TAG ./app/ && \
            docker push $ECR_REPO:$IMAGE_TAG
