@@ -5,3 +5,4 @@ ADD ./appdbpass.env /count_app/
 WORKDIR /count_app/
 RUN pip install -r requirements.txt
 ENTRYPOINT sleep 5s ; python3 wsgi_app.py
+# test
