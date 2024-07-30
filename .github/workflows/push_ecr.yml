@@ -21,8 +21,8 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-1
 
-    - name: login to ecr
-      uses: aws-actions/amazon-ecr-login@v2
+    #- name: login to ecr
+     # uses: aws-actions/amazon-ecr-login@v2
     
     - name: build  and push to ecr
       run:  | 
