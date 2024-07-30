@@ -4,14 +4,15 @@ import socket
 import mysql.connector
 
 
-password = os.getenv('DB_PASS')
+# password = os.getenv('DB_PASS')
 
 
 def establish_connection():
-    connection = mysql.connector.connect(user='root',
-                                         password=password,
-                                         host='db',
-                                         database='count_app')
+    connection = mysql.connector.connect(user='admin',
+                                         password='1234admin',
+                                         host='daniel-task-db.coow8klldjgb.us-east-1.rds.amazonaws.com',
+                                         database='count_app',
+                                         port=3306)
 
     return connection
 
@@ -59,3 +60,4 @@ def access(remote_ip):
     conn.close()
 
     return local_ip
+
