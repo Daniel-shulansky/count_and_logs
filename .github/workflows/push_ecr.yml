@@ -24,7 +24,7 @@ jobs:
     
     - uses: actions/checkout@v4
     - name: build docker image out of app
-      run: docker build --no-cache -t $ECR_REPO:$IMAGE_TAG ./app/ && \
+      run: echo $IMAGE_TAG $ECR_REPO && docker build --no-cache -t $ECR_REPO:$IMAGE_TAG ./app/ && \
            docker push $ECR_REPO:$IMAGE_TAG
       
 
