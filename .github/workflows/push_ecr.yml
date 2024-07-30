@@ -23,7 +23,7 @@ jobs:
     
     - name: build docker image out of app
       run:  | 
-            IMAGE_TAG="count_app-${{ github.ref_name }}-$(git rev-parse --short $GITHUB_SHA):latest"
+            IMAGE_TAG="count_app-${{ github.ref_name }}-$(git rev-parse --short $GITHUB_SHA)-latest"
             echo ${{ vars.ECR_REPO }}:$IMAGE_TAG && docker build --no-cache -t $ECR_REPO:$IMAGE_TAG ./app/
             docker push ${{ vars.ECR_REPO }}:$IMAGE_TAG
       
