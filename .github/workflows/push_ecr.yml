@@ -20,13 +20,11 @@ jobs:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-1
-
-    - name: set IMAGE_TAG
-      run: IMAGE_TAG="count_app-${{ github.ref_name }}-$(git rev-parse --short $GITHUB_SHA):latest" && echo $IMAGE_TAG
     
     - name: build docker image out of app
-      run: echo $ECR_REPO  $IMAGE_TAG && docker build --no-cache -t $ECR_REPO:$IMAGE_TAG ./app/ && \
-           docker push $ECR_REPO:$IMAGE_TAG
+      run:  IMAGE_TAG="count_app-${{ github.ref_name }}-$(git rev-parse --short $GITHUB_SHA):latest" && \
+            echo ${{ vars.ECR_REPO }}:$IMAGE_TAG && docker build --no-cache -t $ECR_REPO:$IMAGE_TAG ./app/ && \
+            docker push ${{ vars.ECR_REPO }}:$IMAGE_TAG
       
 
   
